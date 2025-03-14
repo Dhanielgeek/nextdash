@@ -28,7 +28,7 @@ export default function LoginPage() {
           </div>
 
           {/* Heading */}
-          <div className="mb-6 md:mb-8 bg-amber-300">
+          <div className="mb-6 md:mb-8 ">
             <h1 className="text-2xl md:text-3xl font-bold text-black">
               Log in
             </h1>
@@ -38,7 +38,7 @@ export default function LoginPage() {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-4 bg-green-600">
+          <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-gray-600 text-sm mb-1">Email</label>
               <input
