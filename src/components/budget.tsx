@@ -1,4 +1,6 @@
 // components/dashboard/BudgetSection.tsx
+"use client";
+
 import { FC } from "react";
 
 interface Budget {

@@ -1,28 +1,28 @@
-// File structure:
-// - components/layout/Sidebar.tsx
-// - components/layout/Layout.tsx
-// - components/dashboard/BankAccounts.tsx
-// - components/dashboard/RecentTransactions.tsx
-// - components/dashboard/BankCard.tsx
-// - components/dashboard/BudgetSection.tsx
-// - pages/index.tsx
-
-// pages/index.tsx
-import { NextPage } from "next";
-import Head from "next/head";
-import Layout from "./layout";
+"use client";
+// import { NextPage } from "next";
 import BankAccounts from "@/components/Bankacct";
 import RecentTransactions from "@/components/tranactions";
 import BankCard from "@/components/bankcard";
 import BudgetSection from "@/components/budget";
-import spotify from "../../../public/Spotify_Primary_Logo_RGB_Green.png";
-import figma from "../../../public/figma.png";
-import guyface from "../../../public/guyface.webp";
-import another from "../../../public/thisface.jpg";
-import js from "../../../public/jsmastry.png";
-import Image from "next/image";
+// import spotify from "../../../public/Spotify_Primary_Logo_RGB_Green.png";
+// import figma from "../../../public/figma.png";
+// import guyface from "../../../public/guyface.webp";
+// import another from "../../../public/thisface.jpg";
 
-const Home: NextPage = () => {
+const js = "/jsmastry.png";
+
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+const Home = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  console.log(isClient);
+
   // Mock data
   const userData = {
     name: "Adrian",
@@ -45,7 +45,7 @@ const Home: NextPage = () => {
     {
       id: "1",
       merchant: "Spotify",
-      logo: <Image src={spotify} alt="spotify" />,
+      logo: "",
       amount: 15.0,
       status: "processing" as const,
       date: "Wed",
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
     {
       id: "2",
       merchant: "Alexa Doe",
-      logo: <Image src={guyface} alt="ad" />,
+      logo: "",
       amount: 988.0,
       status: "success" as const,
       date: "Wed",
@@ -67,7 +67,7 @@ const Home: NextPage = () => {
     {
       id: "3",
       merchant: "Figma",
-      logo: <Image src={figma} alt="figma" />,
+      logo: "",
       amount: 18.99,
       status: "processing" as const,
       date: "Tue",
@@ -89,7 +89,7 @@ const Home: NextPage = () => {
     {
       id: "5",
       merchant: "Sam Sulek",
-      logo: <Image src={another} alt="ad" />,
+      logo: "",
       amount: 40.2,
       status: "declined" as const,
       date: "Tue",
@@ -196,13 +196,13 @@ const Home: NextPage = () => {
           </div>
 
           {/* Bank Accounts */}
-          <BankAccounts
+          {/* <BankAccounts
             totalBalance={bankAccounts.totalBalance}
             accountCount={bankAccounts.accountCount}
-          />
+          /> */}
 
           {/* Recent Transactions */}
-          <RecentTransactions transactions={transactions} banks={banks} />
+          {/* <RecentTransactions transactions={transactions} banks={banks} /> */}
         </div>
 
         <div className="">
@@ -248,11 +248,11 @@ const Home: NextPage = () => {
             </div>
 
             {/* Bank Card */}
-            <BankCard {...cardData} />
+            {/* <BankCard {...cardData} /> */}
           </div>
 
           {/* Budgets */}
-          <BudgetSection budgets={budgets} />
+          {/* <BudgetSection budgets={budgets} /> */}
         </div>
       </div>
     </div>

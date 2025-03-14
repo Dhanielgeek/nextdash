@@ -1,4 +1,6 @@
 // components/dashboard/BankAccounts.tsx
+"use client";
+
 import { FC } from "react";
 
 interface BankAccountsProps {

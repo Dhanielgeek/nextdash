@@ -3,7 +3,7 @@ import { useState } from "react";
 import Logo from "../../../../public/logofor.png";
 import sign from "../../../../public/Sign up-cuate.svg";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
