@@ -1,7 +1,6 @@
-// components/layout/Sidebar.tsx
 "use client";
 
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import {
   HomeIcon,
@@ -25,12 +24,25 @@ interface SidebarProps {
 }
 
 const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
+  const [screenWidth, setScreenWidth] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Get window width after component mounts
+    setScreenWidth(window.innerWidth);
+
+    // Optional: Listen for window resize events
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       {/* Backdrop overlay - only visible on mobile when sidebar is open */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50  z-20 lg:hidden"
+          className="fixed inset-0 bg-black opacity-50 z-20 lg:hidden"
           onClick={toggleSidebar}
           aria-hidden="true"
         />
@@ -38,7 +50,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
 
       {/* Mobile toggle button - always hidden on desktop */}
       <button
-        className="fixed top-1  left-[23rem] p-2 rounded-md bg-blue-600 text-white z-30 lg:hidden"
+        className="fixed top-1 left-[23rem] p-2 rounded-md bg-blue-600 text-white z-30 lg:hidden"
         onClick={toggleSidebar}
         aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
       >
@@ -49,7 +61,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
         )}
       </button>
 
-      {/* Single sidebar that transforms on mobile and stays visible on desktop */}
+      {/* Sidebar */}
       <aside
         className={`
           fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-30
@@ -57,15 +69,15 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0 lg:static lg:z-10
         `}
-        aria-hidden={!isOpen && window.innerWidth < 1024}
+        aria-hidden={!isOpen && screenWidth !== null && screenWidth < 1024} // ✅ Fixed
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className=" border-b  w-[100%] h-[10%]">
-            <div className="flex items-center  w-[100%] h-[100%]">
+          <div className="border-b w-full h-[10%]">
+            <div className="flex items-center w-full h-full">
               <Image
                 src={logo}
-                className="w-[100%] object-contain h-[100%]"
+                className="w-full object-contain h-full"
                 alt="logo"
               />
             </div>
@@ -104,7 +116,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
               className="flex items-center font-medium px-4 py-2 text-white bg-blue-600 rounded-md"
             >
               <HomeIcon className="h-5 w-5 mr-3" />
-              <span className="">Home</span>
+              <span>Home</span>
             </Link>
 
             <Link
@@ -112,7 +124,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
               className="flex items-center font-medium px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
             >
               <CreditCardIcon className="h-5 w-5 mr-3 text-gray-400" />
-              <span className="">My Banks</span>
+              <span>My Banks</span>
             </Link>
 
             <Link
@@ -120,7 +132,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
               className="flex items-center font-medium px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
             >
               <ClockIcon className="h-5 w-5 mr-3 text-gray-400" />
-              <span className="">Transaction History</span>
+              <span>Transaction History</span>
             </Link>
 
             <Link
@@ -128,7 +140,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
               className="flex items-center font-medium px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
             >
               <BanknotesIcon className="h-5 w-5 mr-3 text-gray-400" />
-              <span className="">Payment Transfer</span>
+              <span>Payment Transfer</span>
             </Link>
 
             <Link
@@ -136,11 +148,11 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
               className="flex items-center font-medium px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
             >
               <LinkIcon className="h-5 w-5 mr-3 text-gray-400" />
-              <span className="">Connect Bank</span>
+              <span>Connect Bank</span>
             </Link>
           </nav>
 
-          {/* User info at bottom */}
+          {/* User Info */}
           <div className="p-4 border-t flex items-center">
             <div className="h-8 w-8 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 mr-3">
               {user.name.charAt(0)}

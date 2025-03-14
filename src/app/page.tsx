@@ -13,7 +13,7 @@ export default function LoginPage() {
     e.preventDefault();
     // Simulate login
     if (email && password) {
-      router.push("/dashboard");
+      router.push("/dash");
     }
   };
 
