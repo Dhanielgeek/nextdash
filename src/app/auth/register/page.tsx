@@ -3,6 +3,7 @@ import { useState } from "react";
 import Logo from "../../../../public/logofor.png";
 import sign from "../../../../public/Sign up-cuate.svg";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,8 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -265,9 +268,12 @@ const Signup = () => {
             <div className="text-center mt-4">
               <p className="text-sm text-gray-600">
                 Already have an account?{" "}
-                <a href="/" className="text-blue-600 hover:underline">
+                <span
+                  className="text-blue-600 hover:underline"
+                  onClick={() => router.push("/")}
+                >
                   Log in
-                </a>
+                </span>
               </p>
             </div>
           </form>
