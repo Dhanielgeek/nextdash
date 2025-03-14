@@ -49,17 +49,19 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, user }) => {
       )}
 
       {/* Mobile toggle button - always hidden on desktop */}
-      <button
-        className="fixed top-1 left-[23rem] p-2 rounded-md bg-blue-600 text-white z-30 lg:hidden"
-        onClick={toggleSidebar}
-        aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
-      >
-        {isOpen ? (
-          <XMarkIcon className="h-6 w-6" />
-        ) : (
-          <Bars3Icon className="h-6 w-6" />
-        )}
-      </button>
+      <div className="w-full h-[7vh] bg-blue-100 fixed  mb-12  flex justify-end items-center px-4   text-white z-30 lg:hidden">
+        <button
+          className=" bg-blue-500 px-2 rounded-md py-2"
+          onClick={toggleSidebar}
+          aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
+        >
+          {isOpen ? (
+            <XMarkIcon className=" h-6 w-6" />
+          ) : (
+            <Bars3Icon className="h-6 w-6" />
+          )}
+        </button>
+      </div>
 
       {/* Sidebar */}
       <aside
