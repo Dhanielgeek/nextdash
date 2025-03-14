@@ -1,4 +1,5 @@
 // components/dashboard/BankCard.tsx
+"use client";
 import { FC } from "react";
 
 interface BankCardProps {

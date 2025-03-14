@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, ReactNode, useState, useEffect } from "react";
+import { FC, ReactNode, useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import { Lora, Inter } from "next/font/google";
 
@@ -12,7 +12,7 @@ interface LayoutProps {
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Supports different font weights
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -25,23 +25,10 @@ const inter = Inter({
 });
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-  // Initialize sidebar as closed on mobile, will be controlled by media query
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  // Close sidebar when resizing to desktop to avoid issues
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setSidebarOpen(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const [sidebarOpen, setSidebarOpen] = useState(false); // Default to false
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
+    setSidebarOpen((prev) => !prev);
   };
 
   const user = {
@@ -56,7 +43,6 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} user={user} />
 
       <div className="flex-1 overflow-auto">
-        {/* Main content area */}
         <main className="p-6 lg:p-8">{children}</main>
       </div>
     </div>

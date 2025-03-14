@@ -23,17 +23,12 @@ export default function LoginPage() {
       <div className="w-full md:w-1/2 bg-white h-screen flex justify-center items-center py-8 md:py-16 px-4">
         <div className="w-full max-w-md ">
           {/* Logo */}
-          <div className="mb-6 md:mb-8">
-            <Image
-              src={Logo}
-              alt="logo"
-              className="w-32 md:w-40 h-auto"
-              priority
-            />
+          <div className="mb-12 md:mb-8">
+            <Image src={Logo} alt="logo" className="w-[20%] h-[20%]" priority />
           </div>
 
           {/* Heading */}
-          <div className="mb-6 md:mb-8">
+          <div className="mb-6 md:mb-8 bg-amber-300">
             <h1 className="text-2xl md:text-3xl font-bold text-black">
               Log in
             </h1>
@@ -43,7 +38,7 @@ export default function LoginPage() {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-4 bg-green-600">
             <div>
               <label className="block text-gray-600 text-sm mb-1">Email</label>
               <input
